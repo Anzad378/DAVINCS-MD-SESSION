@@ -58,9 +58,9 @@ router.get('/', async (req, res) => {
 
                let GIFTED_MD_TEXT = `
 ┏━━━━━━━━━━━━━━
-┃*Enjoy using Davincs_md*
+┃Enjoy using Davincs_md
 ┗━━━━━━━━━━━━
-©❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
+❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
 
 *𝔻𝔸𝕍𝕀ℕℂ𝕊-𝕄𝔻-𝕎𝔸𝔹𝕆𝕋 𝕊𝔼𝕊𝕊𝕀𝕆ℕ 𝕀𝕊 ℂ𝕆ℕℕ𝔼ℂ𝕋𝔼𝔻*
 
