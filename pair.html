@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Davincs-MD Pairing Code" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>𝐃𝐀𝐕𝐈𝐍𝐂𝐒-𝐌𝐃 Pair Code</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --primary: linear-gradient(135deg, #00d4ff, #7e00ff);
@@ -21,34 +19,25 @@
       --glow: 0 0 15px rgba(0, 212, 255, 0.3);
     }
 
-    *, *::before, *::after {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
     body {
-      font-family: 'JetBrains Mono', monospace;
-      background: var(--bg);
-      color: var(--text);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      line-height: 1.6;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+      color: var(--text);
+      padding: 80px 20px 120px; /* Space for header and music player */
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 3rem;
-      background: var(--glass);
-      backdrop-filter: blur(var(--blur));
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+    /* Background with blur effect */
     .background-image {
       position: fixed;
       top: 0;
@@ -56,11 +45,26 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -2;
-      filter: blur(8px) brightness(0.4);
+      z-index: -3;
+      filter: blur(8px) brightness(0.6);
       transform: scale(1.1);
     }
-    
+
+    /* Header with logo */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--glass);
+      backdrop-filter: blur(var(--blur));
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
     .logo-container {
       display: flex;
@@ -68,87 +72,85 @@
       gap: 1rem;
     }
 
-    .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
+    .logo-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      box-shadow: var(--glow);
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
       font-weight: 700;
-      letter-spacing: 1px;
       background: var(--primary);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: var(--glow);
     }
 
-    .logo-image {
-      height: 40px;
-      width: auto;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(0, 212, 255, 0.3);
-    }
-
-    .status {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .status-item {
+    /* Battery indicator */
+    .battery-container {
       background: rgba(0, 0, 0, 0.3);
-      padding: 0.6rem 1.2rem;
       border-radius: 50px;
+      padding: 0.5rem 1rem;
       display: flex;
       align-items: center;
       gap: 0.7rem;
       font-size: 0.9rem;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: var(--transition);
     }
 
-    .status-item:hover {
-      background: rgba(0, 212, 255, 0.1);
-      border-color: var(--highlight);
-    }
-
-    .status-item i {
+    .battery-icon {
       color: var(--highlight);
+      font-size: 1.2rem;
     }
 
-    main {
-      flex: 1;
-      padding: 3rem;
+    /* Main container */
+    .main-content {
+      width: 100%;
+      max-width: 500px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 2.5rem;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
     }
 
-    .pair-container {
+    /* Pairing box */
+    .box {
       background: var(--glass);
       backdrop-filter: blur(var(--blur));
       border-radius: var(--radius);
       padding: 2rem;
       text-align: center;
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      width: 100%;
-      max-width: 500px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
     }
 
-    .pair-container h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 600;
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), var(--glow);
+    }
+
+    .box h2 {
+      font-size: 1.8rem;
       margin-bottom: 1rem;
-      letter-spacing: 1px;
       background: var(--primary);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: var(--glow);
     }
 
-    .pair-container h5 {
+    .box h5 {
       color: var(--muted);
       margin-bottom: 1.5rem;
+      font-weight: normal;
     }
 
+    /* Input styling */
     .input-container {
       display: flex;
       gap: 0.5rem;
@@ -162,7 +164,7 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(0, 0, 0, 0.3);
       color: var(--text);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: inherit;
       transition: var(--transition);
     }
 
@@ -179,7 +181,6 @@
       border: none;
       border-radius: var(--radius);
       font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
       cursor: pointer;
       transition: var(--transition);
     }
@@ -189,6 +190,7 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
+    /* Result display */
     #pair-result {
       margin-top: 1.5rem;
       padding: 1rem;
@@ -209,9 +211,9 @@
       color: white;
       cursor: pointer;
       font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
       transition: var(--transition);
       margin-top: 1rem;
+      display: none;
     }
 
     #copy-code:hover {
@@ -219,105 +221,81 @@
       box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
     }
 
+    /* Music player - Positioned below pairing container */
     .music-player {
       width: 100%;
       max-width: 500px;
       background: var(--glass);
-      border-radius: var(--radius);
-      padding: 2rem;
       backdrop-filter: blur(var(--blur));
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .music-player h2 {
-      font-family: 'Orbitron', sans-serif;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1px;
-      background: var(--primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-
-    .track {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 1.2rem;
       border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 90;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .music-player h3 {
+      color: var(--highlight);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .music-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .music-subtitle {
+      color: var(--muted);
+      font-size: 0.9rem;
       margin-bottom: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: var(--transition);
-    }
-
-    .track:hover {
-      background: rgba(0, 0, 0, 0.4);
-      border-color: rgba(0, 212, 255, 0.2);
-    }
-
-    .progress {
-      width: 100%;
-      height: 6px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 3px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .progress-fill {
-      width: 0%;
-      background: linear-gradient(90deg, #00d4ff, #7e00ff);
-      height: 100%;
-      transition: width 0.1s linear;
-      position: relative;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      width: 100%;
     }
 
     .play-btn {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--highlight);
-      padding: 0.6rem 1.2rem;
-      border-radius: 50px;
-      color: white;
-      cursor: pointer;
-      font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
-      transition: var(--transition);
+      background: var(--primary);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: center;
+      margin: 0 auto;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: var(--transition);
     }
 
     .play-btn:hover {
-      background: rgba(0, 212, 255, 0.1);
-      box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+      transform: scale(1.1);
     }
 
-    .time {
-      font-family: 'JetBrains Mono', monospace;
+    .play-btn i {
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .time-display {
+      margin-top: 1rem;
       font-size: 0.9rem;
       color: var(--muted);
-      min-width: 50px;
-      text-align: center;
     }
 
+    /* Responsive design */
     @media (max-width: 768px) {
-      header {
-        padding: 1rem 1.5rem;
-        flex-direction: column;
-        gap: 1rem;
+      .header {
+        padding: 0.8rem 1rem;
       }
       
-      main {
-        padding: 1.5rem;
+      .logo-text {
+        font-size: 1.2rem;
+      }
+      
+      body {
+        padding: 70px 15px 100px;
       }
       
       .input-container {
@@ -328,33 +306,34 @@
         width: 100%;
       }
       
-      .logo-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .status {
-        margin-top: 1rem;
+      .music-player {
+        padding: 1rem;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Blurred Background Image -->
+  <img src="https://files.catbox.moe/tdrs22.jpg" alt="Davincs-MD Background" class="background-image">
 
-   <img src="https://files.catbox.moe/o3d5hk.jpg" alt="Davincs-MD Background" class="background-image">
-  
-  <header>
+  <!-- Header with Logo -->
+  <header class="header">
     <div class="logo-container">
-      <img src="https://files.catbox.moe/o3d5hk.jpg" alt="Davincs-MD Logo" class="logo-image">
-      <div class="logo">𝐃𝐀𝐕𝐈𝐍𝐂𝐒-𝐌𝐃</div>
+      <img src="https://files.catbox.moe/frefzq.jpg" alt="Davincs-MD Logo" class="logo-img">
+      <div class="logo-text">𝐃𝐀𝐕𝐈𝐍𝐂𝐒-𝐌𝐃</div>
     </div>
-    <div class="status">
-      <div class="status-item"><i class="fas fa-bolt"></i> <span id="battery">--%</span></div>
+    
+    <!-- Battery Indicator -->
+    <div class="battery-container">
+      <i class="fas fa-battery-full battery-icon" id="battery-icon"></i>
+      <span id="battery-level">--%</span>
     </div>
   </header>
 
-  <main>
-    <div class="pair-container">
+  <!-- Main Content Container -->
+  <div class="main-content">
+    <!-- Pairing Box -->
+    <div class="box">
       <h2>DAVINCS-MD PAIRING CODE</h2>
       <h5>BEST WHATSAPP BOT MADE BY DAVINCS TECH</h5>
       <p>Please enter your number with country code</p>
@@ -368,25 +347,22 @@
         <p id="waiting-message" style="display: none;">Please wait a while...</p>
       </div>
       
-      <button id="copy-code" style="display: none;" onclick="copyCode()">COPY CODE</button>
+      <button id="copy-code" onclick="copyCode()">COPY CODE</button>
     </div>
 
+    <!-- Music Player - Positioned below pairing container -->
     <div class="music-player">
-      <h2>NOW PLAYING</h2>
-      <div class="track">
-        <div>
-          <strong>DAVINCS-MD MOTIVATION </strong>
-          <div class="muted">Davincs Team</div>
-        </div>
-        <div class="controls">
-          <button class="play-btn" onclick="togglePlay('audio1')"><i class="fas fa-play"></i> PLAY</button>
-          <div class="progress"><div class="progress-fill" id="progress1"></div></div>
-          <span class="time" id="time1">0:00</span>
-        </div>
-        <audio id="audio1" src="https://files.catbox.moe/efmcxm.mp3"></audio>
-      </div>
+      <h3>NOW PLAYING</h3>
+      <div class="music-title">DAVINCS-MD</div>
+      <div class="music-subtitle">MOTIVATION</div>
+      <button class="play-btn" onclick="togglePlay()">
+        <i class="fas fa-pause" id="play-icon"></i>
+      </button>
+      <div class="time-display" id="time1">0:00</div>
+      <div class="music-subtitle">Davincs Team</div>
+      <audio id="audio1" src="https://files.catbox.moe/hpwsi2.mp3" loop></audio>
     </div>
-  </main>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <script>
@@ -396,6 +372,8 @@
     const numberInput = document.getElementById("number");
     const copyCodeBtn = document.getElementById("copy-code");
     const waitingMessage = document.getElementById("waiting-message");
+    const batteryLevel = document.getElementById("battery-level");
+    const batteryIcon = document.getElementById("battery-icon");
 
     // Copy code function
     async function copyCode() {
@@ -447,6 +425,7 @@
       
       waitingMessage.style.display = "block";
       pairResult.innerHTML = "";
+      copyCodeBtn.style.display = "none";
       
       try {
         const { data } = await axios(`/code?number=${cleanNumber}`);
@@ -466,66 +445,85 @@
     });
 
     // Music player controls
-    const togglePlay = (id) => {
-      const audio = document.getElementById(id);
-      const progress = document.getElementById('progress1');
-      const time = document.getElementById('time1');
-      const button = document.querySelector(`.play-btn[onclick*="${id}"]`);
-      
+    const audio = document.getElementById('audio1');
+    const playBtn = document.querySelector('.play-btn');
+    const playIcon = document.getElementById('play-icon');
+    const timeDisplay = document.getElementById('time1');
+    
+    // Auto-play music when page loads (with user interaction)
+    document.addEventListener('click', function initAudio() {
+      audio.play().then(() => {
+        playIcon.classList.replace('fa-play', 'fa-pause');
+        updateTimeDisplay();
+      }).catch(error => {
+        console.log('Auto-play prevented:', error);
+      });
+      document.removeEventListener('click', initAudio);
+    }, { once: true });
+
+    function togglePlay() {
       if (audio.paused) {
         audio.play();
-        button.innerHTML = '<i class="fas fa-pause"></i> PAUSE';
-        
-        audio.ontimeupdate = () => {
-          const percent = (audio.currentTime / audio.duration) * 100;
-          progress.style.width = percent + '%';
-          
-          const minutes = Math.floor(audio.currentTime / 60);
-          const seconds = Math.floor(audio.currentTime % 60);
-          time.textContent = `${minutes}:${String(seconds).padStart(2, '0')}`;
-        };
-        
-        audio.onended = () => {
-          progress.style.width = '0%';
-          time.textContent = '0:00';
-          button.innerHTML = '<i class="fas fa-play"></i> PLAY';
-        };
+        playIcon.classList.replace('fa-play', 'fa-pause');
       } else {
         audio.pause();
-        button.innerHTML = '<i class="fas fa-play"></i> PLAY';
+        playIcon.classList.replace('fa-pause', 'fa-play');
       }
     }
 
-    // Battery status
-    const updateBattery = async () => {
+    function updateTimeDisplay() {
+      const minutes = Math.floor(audio.currentTime / 60);
+      const seconds = Math.floor(audio.currentTime % 60);
+      timeDisplay.textContent = `${minutes}:${String(seconds).padStart(2, '0')}`;
+      
+      if (!audio.paused) {
+        requestAnimationFrame(updateTimeDisplay);
+      }
+    }
+
+    audio.addEventListener('timeupdate', updateTimeDisplay);
+
+    // Battery status indicator
+    async function updateBattery() {
       if (navigator.getBattery) {
         try {
           const battery = await navigator.getBattery();
-          const setBattery = () => {
+          
+          const updateBatteryUI = () => {
             const batteryPercent = Math.round(battery.level * 100);
-            const batteryElement = document.getElementById('battery');
-            batteryElement.innerText = `${batteryPercent}%`;
+            batteryLevel.textContent = `${batteryPercent}%`;
             
-            let batteryIcon = 'fa-bolt';
-            if (batteryPercent <= 20) batteryIcon = 'fa-battery-quarter';
-            else if (batteryPercent <= 50) batteryIcon = 'fa-battery-half';
-            else if (batteryPercent <= 80) batteryIcon = 'fa-battery-three-quarters';
-            else if (batteryPercent <= 100) batteryIcon = 'fa-battery-full';
+            // Update battery icon based on level
+            let iconClass = 'fa-battery-empty';
+            if (batteryPercent > 80) iconClass = 'fa-battery-full';
+            else if (batteryPercent > 60) iconClass = 'fa-battery-three-quarters';
+            else if (batteryPercent > 40) iconClass = 'fa-battery-half';
+            else if (batteryPercent > 20) iconClass = 'fa-battery-quarter';
             
-            batteryElement.previousElementSibling.className = `fas ${batteryIcon}`;
+            // Add charging bolt if charging
+            if (battery.charging) {
+              batteryIcon.className = `fas fa-bolt ${iconClass}`;
+              batteryIcon.style.color = '#00ff00';
+            } else {
+              batteryIcon.className = `fas ${iconClass}`;
+              batteryIcon.style.color = 'var(--highlight)';
+            }
           };
           
-          battery.addEventListener('levelchange', setBattery);
-          battery.addEventListener('chargingchange', setBattery);
-          setBattery();
+          battery.addEventListener('levelchange', updateBatteryUI);
+          battery.addEventListener('chargingchange', updateBatteryUI);
+          updateBatteryUI();
         } catch (error) {
           console.error('Battery API error:', error);
         }
+      } else {
+        batteryLevel.textContent = "N/A";
       }
     }
 
-    // Initialize everything
-    const init = () => {
+    // Initialize
+    window.addEventListener('load', () => {
+      copyCodeBtn.style.display = "none";
       updateBattery();
       
       // Smooth page load
@@ -534,9 +532,7 @@
         document.body.style.transition = 'opacity 0.5s ease';
         document.body.style.opacity = '1';
       }, 100);
-    };
-
-    window.addEventListener('load', init);
+    });
   </script>
 </body>
-</html>
+  </html>
