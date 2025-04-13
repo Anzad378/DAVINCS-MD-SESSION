@@ -57,27 +57,34 @@ router.get('/', async (req, res) => {
                let session = await Pair_Code_By_Gifted_Tech.sendMessage(Pair_Code_By_Gifted_Tech.user.id, { text: '' + b64data });
 
                let GIFTED_MD_TEXT = `
-┏━━━━━━━━━━━━━━
-┃Enjoy using Davincs_md
-┗━━━━━━━━━━━━
-❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
+✨ *DAVINCS-MD-WABOT SESSION CONNECTED* ✨
 
-*𝔻𝔸𝕍𝕀ℕℂ𝕊-𝕄𝔻-𝕎𝔸𝔹𝕆𝕋 𝕊𝔼𝕊𝕊𝕀𝕆ℕ 𝕀𝕊 ℂ𝕆ℕℕ𝔼ℂ𝕋𝔼𝔻*
+━━━━━━━━━━━━━━━━━━━━━
+💎 *Enjoy Using Davincs_md* 💎
+━━━━━━━━━━━━━━━━━━━━━
 
-❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
-~𝑭𝒐𝒍𝒍𝒐𝒘 𝒕𝒉𝒊𝒔 𝒘𝒂𝒄𝒉𝒂𝒏𝒏𝒆𝒍 𝒇𝒐𝒓 𝒃𝒐𝒕 𝒖𝒑𝒅𝒂𝒕𝒆𝒔~ 👇 👇 
-> https://whatsapp.com/channel/0029VakSTEQGZNCk6CqE9E2P
+⚡ *Stay Updated!* ⚡
+Join our official channel for:
+✅ Latest features
+✅ Exclusive updates
+✅ Pro tips & tricks
+🔗 » https://whatsapp.com/channel/0029VakSTEQGZNCk6CqE9E2P
 
-❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
-~𝑭𝒐𝒓 𝒎𝒐𝒓𝒆 𝒊𝒏𝒇𝒐 𝒕𝒂𝒑 𝒐𝒏 𝒕𝒉𝒆 𝒍𝒊𝒏𝒌 𝒃𝒆𝒍𝒐𝒘~ 
-> https://github.com/9Wish882 
-> 𝒅𝒐𝒏𝒕 𝒇𝒐𝒓𝒈𝒆𝒕 𝒕𝒐 𝒇𝒐𝒓𝒌 𝒂𝒏𝒅 𝒔𝒕𝒂𝒓 𝒕𝒉𝒆 𝒓𝒆𝒑𝒐
-❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒❒
- 𝑭𝒐𝒓 𝒂𝒏𝒚 𝒑𝒓𝒐𝒃𝒍𝒆𝒎 𝒕𝒆𝒙𝒕 𝒅𝒆𝒗𝒆𝒍𝒐𝒑𝒆𝒓
-> https://wa.me/255759637644
-*𝐓𝐇𝐈𝐒 𝐁𝐎𝐓 🤖 𝐈𝐒 𝐌𝐀𝐃𝐄 𝐁𝐘 𝐀𝐋𝐋𝐀𝐍@𝐃𝐀𝐕𝐈𝐍𝐂𝐒*
+━━━━━━━━━━━━━━━━━━━━━
+💻 *Developer Resources* 💻
+📌 GitHub: https://github.com/9Wish882/DAVINCS-MD
+🌟 Don't forget to ⭐ star & fork the repo!
 
-🤗Dont Forget To Give Star To My Repo`
+🛠 *Need Help?* 
+💬 Contact Developer: https://wa.me/255759637644
+
+━━━━━━━━━━━━━━━━━━━━━
+🎨 *CREATED WITH PASSION BY* 🎨
+🔥 ALLAN @ DAVINCS 🔥
+
+💖 Support the project by giving a star! 
+Your appreciation motivates us to innovate more!
+━━━━━━━━━━━━━━━━━━━━━`
  await Pair_Code_By_Gifted_Tech.sendMessage(Pair_Code_By_Gifted_Tech.user.id,{text:GIFTED_MD_TEXT},{quoted:session})
  
 
