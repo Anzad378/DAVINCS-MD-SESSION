@@ -29,12 +29,25 @@
 
     body {
       font-family: 'JetBrains Mono', monospace;
-      background: var(--bg);
       color: var(--text);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
       line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .background-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: blur(8px) brightness(0.4);
+      transform: scale(1.1);
     }
 
     header {
@@ -69,10 +82,11 @@
 
     .logo-image {
       height: 40px;
-      width: auto;
+      width: 40px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid rgba(0, 212, 255, 0.3);
+      box-shadow: var(--glow);
     }
 
     .status {
@@ -207,49 +221,64 @@
       box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
     }
 
-    .music-player {
-      width: 100%;
-      max-width: 500px;
+    .music-controls {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
       background: var(--glass);
-      border-radius: var(--radius);
-      padding: 2rem;
       backdrop-filter: blur(var(--blur));
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .music-player h2 {
-      font-family: 'Orbitron', sans-serif;
-      margin-bottom: 1.5rem;
-      letter-spacing: 1px;
-      background: var(--primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-
-    .track {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 1.2rem;
       border-radius: var(--radius);
-      margin-bottom: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .music-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 150px;
+    }
+
+    .music-info strong {
+      font-size: 0.9rem;
+      color: var(--highlight);
+    }
+
+    .music-info .muted {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .play-btn {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--highlight);
+      padding: 0.8rem;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
       transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
     }
 
-    .track:hover {
-      background: rgba(0, 0, 0, 0.4);
-      border-color: rgba(0, 212, 255, 0.2);
+    .play-btn:hover {
+      background: rgba(0, 212, 255, 0.1);
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+      transform: scale(1.1);
     }
 
-    .progress {
-      width: 100%;
-      height: 6px;
+    .progress-container {
+      width: 150px;
+      height: 4px;
       background: rgba(255,255,255,0.1);
-      border-radius: 3px;
+      border-radius: 2px;
       overflow: hidden;
       position: relative;
     }
@@ -259,42 +288,6 @@
       background: linear-gradient(90deg, #00d4ff, #7e00ff);
       height: 100%;
       transition: width 0.1s linear;
-      position: relative;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      width: 100%;
-    }
-
-    .play-btn {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--highlight);
-      padding: 0.6rem 1.2rem;
-      border-radius: 50px;
-      color: white;
-      cursor: pointer;
-      font-weight: 600;
-      font-family: 'JetBrains Mono', monospace;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .play-btn:hover {
-      background: rgba(0, 212, 255, 0.1);
-      box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-    }
-
-    .time {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-      color: var(--muted);
-      min-width: 50px;
-      text-align: center;
     }
 
     @media (max-width: 768px) {
@@ -324,10 +317,20 @@
       .status {
         margin-top: 1rem;
       }
+      
+      .music-controls {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Blurred Background Image -->
+  <img src="https://files.catbox.moe/o3d5hk.jpg" alt="Davincs-MD Background" class="background-image">
+
   <header>
     <div class="logo-container">
       <img src="https://files.catbox.moe/o3d5hk.jpg" alt="Davincs-MD Logo" class="logo-image">
@@ -355,23 +358,23 @@
       
       <button id="copy-code" style="display: none;" onclick="copyCode()">COPY CODE</button>
     </div>
-
-    <div class="music-player">
-      <h2>NOW PLAYING</h2>
-      <div class="track">
-        <div>
-          <strong>DAVINCS-MD ANTHEM</strong>
-          <div class="muted">Davincs Team</div>
-        </div>
-        <div class="controls">
-          <button class="play-btn" onclick="togglePlay('audio1')"><i class="fas fa-play"></i> PLAY</button>
-          <div class="progress"><div class="progress-fill" id="progress1"></div></div>
-          <span class="time" id="time1">0:00</span>
-        </div>
-        <audio id="audio1" src="https://files.catbox.moe/wdap4t.mp3"></audio>
-      </div>
-    </div>
   </main>
+
+  <!-- Music Player Controls -->
+  <div class="music-controls">
+    <div class="music-info">
+      <strong>DAVINCS-MD ANTHEM</strong>
+      <div class="muted">Davincs Team</div>
+    </div>
+    <div class="progress-container">
+      <div class="progress-fill" id="progress1"></div>
+    </div>
+    <button class="play-btn" onclick="togglePlay('audio1')">
+      <i class="fas fa-play" id="play-icon"></i>
+    </button>
+    <span class="time" id="time1">0:00</span>
+    <audio id="audio1" src="https://files.catbox.moe/hpwsi2.mp3" loop></audio>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <script>
@@ -451,15 +454,16 @@
     });
 
     // Music player controls
-    const togglePlay = (id) => {
-      const audio = document.getElementById(id);
-      const progress = document.getElementById('progress1');
-      const time = document.getElementById('time1');
-      const button = document.querySelector(`.play-btn[onclick*="${id}"]`);
-      
+    const audio = document.getElementById('audio1');
+    const progress = document.getElementById('progress1');
+    const timeDisplay = document.getElementById('time1');
+    const playBtn = document.querySelector('.play-btn');
+    const playIcon = document.getElementById('play-icon');
+    
+    function togglePlay() {
       if (audio.paused) {
         audio.play();
-        button.innerHTML = '<i class="fas fa-pause"></i> PAUSE';
+        playIcon.classList.replace('fa-play', 'fa-pause');
         
         audio.ontimeupdate = () => {
           const percent = (audio.currentTime / audio.duration) * 100;
@@ -467,19 +471,27 @@
           
           const minutes = Math.floor(audio.currentTime / 60);
           const seconds = Math.floor(audio.currentTime % 60);
-          time.textContent = `${minutes}:${String(seconds).padStart(2, '0')}`;
+          timeDisplay.textContent = `${minutes}:${String(seconds).padStart(2, '0')}`;
         };
         
         audio.onended = () => {
           progress.style.width = '0%';
-          time.textContent = '0:00';
-          button.innerHTML = '<i class="fas fa-play"></i> PLAY';
+          timeDisplay.textContent = '0:00';
+          playIcon.classList.replace('fa-pause', 'fa-play');
         };
       } else {
         audio.pause();
-        button.innerHTML = '<i class="fas fa-play"></i> PLAY';
+        playIcon.classList.replace('fa-pause', 'fa-play');
       }
     }
+
+    // Allow clicking on progress bar to seek
+    document.querySelector('.progress-container').addEventListener('click', (e) => {
+      const rect = e.target.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pos * audio.duration;
+      progress.style.width = `${pos * 100}%`;
+    });
 
     // Battery status
     const updateBattery = async () => {
@@ -524,4 +536,4 @@
     window.addEventListener('load', init);
   </script>
 </body>
-</html>
+  </html>
