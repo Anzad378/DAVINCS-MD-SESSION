@@ -72,7 +72,7 @@ Join our official channel for:
 
 ━━━━━━━━━━━━━━━━━━━━━
 💻 *Developer Resources* 💻
-📌 GitHub: https://github.com/Anzad378/KINGDOM-MD.
+📌 GitHub: https://github.com/Anzad378/KINGD0M-MD
 🌟 Don't forget to ⭐ star & fork the repo!
 
 🛠 *Need Help?* 
