@@ -57,10 +57,10 @@ router.get('/', async (req, res) => {
                let session = await Pair_Code_By_Gifted_Tech.sendMessage(Pair_Code_By_Gifted_Tech.user.id, { text: '' + b64data });
 
                let GIFTED_MD_TEXT = `
-✨ *DAVINCS-MD-WABOT SESSION CONNECTED* ✨
+✨ *KINGDOM-MD-WABOT SESSION CONNECTED* ✨
 
 ━━━━━━━━━━━━━━━━━━━━━
-💎 *Enjoy Using Davincs_md* 💎
+💎 *Enjoy Using kingdom_md* 💎
 ━━━━━━━━━━━━━━━━━━━━━
 
 ⚡ *Stay Updated!* ⚡
@@ -68,19 +68,19 @@ Join our official channel for:
 ✅ Latest features
 ✅ Exclusive updates
 ✅ Pro tips & tricks
-🔗 » https://whatsapp.com/channel/0029VakSTEQGZNCk6CqE9E2P
+🔗 » https://whatsapp.com/channel/0029Vb6CC2dB4hdPp1CrYv0f
 
 ━━━━━━━━━━━━━━━━━━━━━
 💻 *Developer Resources* 💻
-📌 GitHub: https://github.com/9Wish882/DAVINCS-MD
+📌 GitHub: https://github.com/Anzad378/KINGDOM-MD.
 🌟 Don't forget to ⭐ star & fork the repo!
 
 🛠 *Need Help?* 
-💬 Contact Developer: https://wa.me/255759637644
+💬 Contact Developer: https://wa.me/message/B67R2CEOSVXJK1
 
 ━━━━━━━━━━━━━━━━━━━━━
 🎨 *CREATED WITH PASSION BY* 🎨
-🔥 ALLAN @ DAVINCS 🔥
+🔥  KINGDOM MD 🔥
 
 💖 Support the project by giving a star! 
 Your appreciation motivates us to innovate more!
